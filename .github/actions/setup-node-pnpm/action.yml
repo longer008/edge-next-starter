@@ -19,7 +19,18 @@ runs:
       shell: bash
       run: |
         corepack enable
-        corepack prepare pnpm@8.15.0 --activate
+        # Extract pnpm version from packageManager field in package.json
+        # Handle integrity suffix (e.g., pnpm@9.10.0+sha512...) by stripping +... portion
+        PNPM_VERSION=$(node -p "
+          const pm = require('./package.json').packageManager;
+          if (!pm) return 'latest';
+          const [, versionWithSuffix = ''] = pm.split('@');
+          if (!versionWithSuffix) return 'latest';
+          const [cleanVersion] = versionWithSuffix.split('+');
+          return cleanVersion || 'latest';
+        ")
+        echo "Using pnpm version: $PNPM_VERSION"
+        corepack prepare pnpm@${PNPM_VERSION} --activate
         pnpm -v
         node -v
 
