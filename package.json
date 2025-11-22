@@ -1,5 +1,5 @@
 {
-  "name": "cloudflare-worker-template",
+  "name": "edge-next-starter",
   "version": "1.1.0",
   "description": "Next.js on Cloudflare Pages with Edge Runtime, D1, R2, and KV",
   "main": "index.js",
