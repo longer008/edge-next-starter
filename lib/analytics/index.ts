@@ -32,6 +32,16 @@ export enum AnalyticsEventType {
   POST_CREATED = 'post.created',
   FILE_UPLOADED = 'file.uploaded',
 
+  // Payment events (Stripe)
+  CHECKOUT_STARTED = 'checkout.started',
+  PAYMENT_SUCCEEDED = 'payment.succeeded',
+  PAYMENT_FAILED = 'payment.failed',
+  SUBSCRIPTION_CREATED = 'subscription.created',
+  SUBSCRIPTION_UPDATED = 'subscription.updated',
+  SUBSCRIPTION_CANCELED = 'subscription.canceled',
+  SUBSCRIPTION_RESUMED = 'subscription.resumed',
+  SUBSCRIPTION_ENDED = 'subscription.ended',
+
   // Performance events
   PERFORMANCE_METRIC = 'performance.metric',
   SLOW_OPERATION = 'performance.slow_operation',
