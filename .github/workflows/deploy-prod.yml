@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
       - name: Setup Node.js and pnpm
         uses: ./.github/actions/setup-node-pnpm
