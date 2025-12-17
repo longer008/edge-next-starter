@@ -21,13 +21,13 @@ runs:
         corepack enable
         # Extract pnpm version from packageManager field in package.json
         # Handle integrity suffix (e.g., pnpm@9.10.0+sha512...) by stripping +... portion
-        PNPM_VERSION=$(node -p "
+        PNPM_VERSION=$(node -e "
           const pm = require('./package.json').packageManager;
-          if (!pm) return 'latest';
+          if (!pm) { console.log('latest'); process.exit(0); }
           const [, versionWithSuffix = ''] = pm.split('@');
-          if (!versionWithSuffix) return 'latest';
+          if (!versionWithSuffix) { console.log('latest'); process.exit(0); }
           const [cleanVersion] = versionWithSuffix.split('+');
-          return cleanVersion || 'latest';
+          console.log(cleanVersion || 'latest');
         ")
         echo "Using pnpm version: $PNPM_VERSION"
         corepack prepare pnpm@${PNPM_VERSION} --activate
